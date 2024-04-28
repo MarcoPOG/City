@@ -5,38 +5,90 @@
     <title>Weltweite Aktivitäten und Restaurants</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 20px;
         }
         h1 {
-            color: #333;
+            font-size: 28px;
+            margin: 0;
+        }
+        .content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
         }
         p {
             font-size: 16px;
-            color: #555;
+            color: #333;
+            line-height: 1.6;
         }
         a {
             text-decoration: none;
-            color: #007BFF;
+            color: #4CAF50;
         }
         a:hover {
             text-decoration: underline;
         }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f5f5f5;
+            color: #777;
+            font-size: 14px;
+        }
+        .image {
+            text-align: center;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
-    <h1>Willkommen auf der Webseite für weltweite Aktivitäten und Restaurants</h1>
+    <div class="header">
+        <h1>Willkommen bei weltweiten Aktivitäten und Restaurants</h1>
+    </div>
 
-    <p>
-        Diese Webseite bietet eine umfassende Sammlung von Informationen über Restaurants und Aktivitäten auf der ganzen Welt.
-        Sie können nach Regionen, Ländern und Städten navigieren, um Empfehlungen zu finden und sich über beliebte Aktivitäten zu informieren.
-    </p>
+    <div class="content">
+        <div class="image">
+            <img src="welt.jpg" alt="Weltkarte" width="100%" />
+        </div>
+        <p>
+            Diese Webseite bietet eine umfassende Sammlung von Informationen über Restaurants und Aktivitäten auf der ganzen Welt.
+            Erkunden Sie Kontinente, Länder und Städte, um Empfehlungen und beliebte Aktivitäten zu finden.
+        </p>
 
-    <p>
-        Beginnen Sie Ihre Reise, indem Sie auf die untenstehenden Kontinente klicken.
-    </p>
+        <p>
+            Beginnen Sie Ihre Reise, indem Sie auf die untenstehenden Kontinente klicken.
+        </p>
 
-    <ul>
-        <li><a href="Europa.html">Europa - Entdecken Sie die besten Restaurants und Aktivitäten in Europa.</a></li>
-    </ul>
+        <ul>
+            <li><a href="Europa.html">Europa - Entdecken Sie die besten Restaurants und Aktivitäten in Europa.</a></li>
+            <li><a href="Asien.html">Asien - Tauchen Sie ein in die Kultur und Küche Asiens.</a></li>
+            <li><a href="Nordamerika.html">Nordamerika - Erkunden Sie die Städte und Nationalparks.</a></li>
+            <li><a href="Suedamerika.html">Südamerika - Entdecken Sie die farbenfrohen Kulturen.</a></li>
+            <li><a href="Australien.html">Australien - Erleben Sie das Outback und die Strände.</a></li>
+            <li><a href="Afrika.html">Afrika - Entdecken Sie die faszinierenden Landschaften und Tiere.</a></li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        &copy; 2024 Weltweite Aktivitäten und Restaurants. Alle Rechte vorbehalten.
+    </div>
 </body>
 </html>
