@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Paris Restaurants</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function sortTable(columnIndex, isNumeric) {
+            const table = document.getElementById("restaurantTable");
+            let switching = true;
+            let direction = "asc"; // Ascending order
+            let switchCount = 0;
+
+            while (switching) {
+                switching = false;
+                const rows = table.rows;
+                for (let i = 1; i < rows.length - 1; i++) {
+                    let shouldSwitch = false;
+                    const x = rows[i].getElementsByTagName("td")[columnIndex];
+                    const y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+                    
+                    if (isNumeric) {
+                        if ((direction === "asc" && parseFloat(x.innerText) > parseFloat(y.innerText)) ||
+                            (direction === "desc" && parseFloat(x.innerText) < parseFloat(y.innerText))) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else {
+                        if ((direction === "asc" && x.innerText.toLowerCase() > y.innerText.toLowerCase()) ||
+                            (direction === "desc" && x.innerText.toLowerCase() < y.innerText.toLowerCase())) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchCount++;
+                } else {
+                    if (switchCount === 0) {
+                        direction = direction === "asc" ? "desc" : "asc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Paris Restaurants</h1>
+    <table id="restaurantTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0, false)">Name</th>
+                <th onclick="sortTable(1, false)">Kategorie</th>
+                <th>Google Maps</th>
+                <th>Webseite</th>
+                <th onclick="sortTable(4, true)">Bewertung</th>
+                <th>Kommentar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Restaurant A</td>
+                <td>Französisch</td>
+                <td><a href="https://goo.gl/maps/example1">Google Maps</a></td>
+                <td><a href="http://example.com">Webseite</a></td>
+                <td>4.5</td>
+                <td>Ausgezeichnetes Essen!</td>
+            </tr>
+            <tr>
+                <td>Restaurant B</td>
+                <td>Italienisch</td>
+                <td><a href="https://goo.gl/maps/example2">Google Maps</a></td>
+                <td><a href="http://example2.com">Webseite</a></td>
+                <td>4.2</td>
+                <td>Sehr gute Pasta.</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
