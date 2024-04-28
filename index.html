@@ -15,62 +15,94 @@
         th {
             background-color: #f2f2f2;
             text-align: left;
-            cursor: pointer;
         }
     </style>
     <script>
-        function sortTable(columnIndex, isNumeric) {
-            const table = document.getElementById("restaurantTable");
-            let switching = true;
-            let direction = "asc"; // Ascending order
-            let switchCount = 0;
-
-            while (switching) {
-                switching = false;
-                const rows = table.rows;
-                for (let i = 1; i < rows.length - 1; i++) {
-                    let shouldSwitch = false;
-                    const x = rows[i].getElementsByTagName("td")[columnIndex];
-                    const y = rows[i + 1].getElementsByTagName("td")[columnIndex];
-                    
-                    if (isNumeric) {
-                        if ((direction === "asc" && parseFloat(x.innerText) > parseFloat(y.innerText)) ||
-                            (direction === "desc" && parseFloat(x.innerText) < parseFloat(y.innerText))) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    } else {
-                        if ((direction === "asc" && x.innerText.toLowerCase() > y.innerText.toLowerCase()) ||
-                            (direction === "desc" && x.innerText.toLowerCase() < y.innerText.toLowerCase())) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    }
-                }
-                if (shouldSwitch) {
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
-                    switchCount++;
-                } else {
-                    if (switchCount === 0) {
-                        direction = direction === "asc" ? "desc" : "asc";
-                        switching = true;
-                    }
-                }
+        // Diese Funktion wandelt numerische Bewertungen in Kategorien um
+        function getRatingCategory(rating) {
+            if (rating >= 4.5) {
+                return "Highlight";
+            } else if (rating >= 4.0) {
+                return "sehr gut";
+            } else if (rating >= 3.0) {
+                return "gut";
+            } else {
+                return "mittel";
             }
         }
+
+        function populateFilters() {
+            const table = document.getElementById("restaurantTable");
+            const categoryFilter = document.getElementById("categoryFilter");
+            const ratingFilter = document.getElementById("ratingFilter");
+
+            const uniqueCategories = new Set();
+            const uniqueRatings = new Set();
+
+            // Sammele einzigartige Kategorien und Bewertungsstufen
+            for (let i = 1; i < table.rows.length; i++) {
+                const category = table.rows[i].cells[1].innerText;
+                const rating = table.rows[i].cells[4].innerText;
+
+                uniqueCategories.add(category);
+                uniqueRatings.add(rating);
+            }
+
+            // Erstelle Dropdown-Optionen für Kategorie
+            uniqueCategories.forEach(category => {
+                const option = document.createElement("option");
+                option.text = category;
+                categoryFilter.add(option);
+            });
+
+            // Erstelle Dropdown-Optionen für Bewertung
+            uniqueRatings.forEach(rating => {
+                const option = document.createElement("option");
+                option.text = rating;
+                ratingFilter.add(option);
+            });
+        }
+
+        function filterTable() {
+            const table = document.getElementById("restaurantTable");
+            const selectedCategory = document.getElementById("categoryFilter").value;
+            const selectedRating = document.getElementById("ratingFilter").value;
+
+            for (let i = 1; i < table.rows.length; i++) {
+                const category = table.rows[i].cells[1].innerText;
+                const rating = table.rows[i].cells[4].innerText;
+
+                const categoryMatch = (selectedCategory === "Alle" || category === selectedCategory);
+                const ratingMatch = (selectedRating === "Alle" || rating === selectedRating);
+
+                table.rows[i].style.display = (categoryMatch && ratingMatch) ? "" : "none";
+            }
+        }
+
+        window.onload = populateFilters; // Befülle Filter bei Seitenaufruf
     </script>
 </head>
 <body>
     <h1>Paris Restaurants</h1>
+
+    <label for="categoryFilter">Filter nach Kategorie:</label>
+    <select id="categoryFilter" onchange="filterTable()">
+        <option>Alle</option> <!-- Option zum Zurücksetzen des Filters -->
+    </select>
+
+    <label for="ratingFilter">Filter nach Bewertung:</label>
+    <select id="ratingFilter" onchange="filterTable()">
+        <option>Alle</option> <!-- Option zum Zurücksetzen des Filters -->
+    </select>
+
     <table id="restaurantTable">
         <thead>
             <tr>
-                <th onclick="sortTable(0, false)">Name</th>
-                <th onclick="sortTable(1, false)">Kategorie</th>
+                <th>Name</th>
+                <th>Kategorie</th>
                 <th>Google Maps</th>
                 <th>Webseite</th>
-                <th onclick="sortTable(4, true)">Bewertung</th>
+                <th>Bewertung</th>
                 <th>Kommentar</th>
             </tr>
         </thead>
@@ -80,7 +112,7 @@
                 <td>Französisch</td>
                 <td><a href="https://goo.gl/maps/example1">Google Maps</a></td>
                 <td><a href="http://example.com">Webseite</a></td>
-                <td>4.5</td>
+                <td>Highlight</td>
                 <td>Ausgezeichnetes Essen!</td>
             </tr>
             <tr>
@@ -88,8 +120,16 @@
                 <td>Italienisch</td>
                 <td><a href="https://goo.gl/maps/example2">Google Maps</a></td>
                 <td><a href="http://example2.com">Webseite</a></td>
-                <td>4.2</td>
+                <td>sehr gut</td>
                 <td>Sehr gute Pasta.</td>
+            </tr>
+            <tr>
+                <td>Restaurant C</td>
+                <td>Französisch</td>
+                <td><a href="https://goo.gl/maps/example3">Google Maps</a></td>
+                <td><a href="http://example3.com">Webseite</a></td>
+                <td>gut</td>
+                <td>Nettes Ambiente.</td>
             </tr>
         </tbody>
     </table>
