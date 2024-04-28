@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Paris - Restaurants und Aktivitäten</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            color: #555;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+        }
+        .box {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            display: inline-block;
+            min-width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Willkommen in Paris!</h1>
+
+    <p>Wähle deine Kategorie aus:</p>
+
+    <ul>
+        <li><a href="Paris.Restaurants.html" class="box">Restaurants in Paris</a></li>
+        <li><a href="Paris.Aktivitäten.html" class="box">Aktivitäten in Paris</a></li>
+    </ul>
+
+    <p>
+        In der Kategorie "Restaurants" findest du eine Auswahl der besten Orte zum Essen und Trinken in Paris. Die Liste enthält verschiedene Küchenstile und Preisklassen.
+    </p>
+
+    <p>
+        In der Kategorie "Aktivitäten" kannst du die Top-Attraktionen und Freizeitmöglichkeiten in Paris entdecken, von Museen und Galerien bis hin zu Parks und Unterhaltungsangeboten.
+    </p>
+</body>
+</html>
