@@ -5,60 +5,65 @@
     <title>Weltweite Aktivitäten und Restaurants</title>
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #eef1f5;
         }
         .header {
-            background-color: #4CAF50;
+            background-color: #0056b3;
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 40px 20px;
         }
         h1 {
-            font-size: 28px;
+            font-size: 32px;
             margin: 0;
         }
         .content {
-            padding: 20px;
+            padding: 30px 20px;
             max-width: 800px;
             margin: 20px auto;
             background-color: white;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
+            border-radius: 8px;
             text-align: center;
         }
         p {
-            font-size: 16px;
+            font-size: 18px;
             color: #333;
-            line-height: 1.6;
-        }
-        a {
-            text-decoration: none;
-            color: white;
-            background-color: #4CAF50;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        a:hover {
-            background-color: #367C39;
-            text-decoration: none;
+            line-height: 1.8;
         }
         ul {
             list-style-type: none;
             padding: 0;
             margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
         }
         li {
             margin: 10px;
         }
+        a {
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 12px 24px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        a:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
         .footer {
             text-align: center;
             padding: 20px;
-            background-color: #4CAF50;
+            background-color: #0056b3;
             color: white;
-            font-size: 14px;
+            font-size: 16px;
         }
     </style>
 </head>
@@ -68,22 +73,15 @@
     </div>
 
     <div class="content">
-        <p>
-            Diese Webseite bietet eine umfassende Sammlung von Informationen über Restaurants und Aktivitäten auf der ganzen Welt.
-            Erkunden Sie Kontinente, Länder und Städte, um Empfehlungen und beliebte Aktivitäten zu finden.
-        </p>
-
-        <p>
-            Beginnen Sie Ihre Reise, indem Sie auf die untenstehenden Kontinente klicken.
-        </p>
+        <p>Diese Webseite bietet eine umfassende Sammlung von Informationen über Restaurants und Aktivitäten auf der ganzen Welt. Erkunden Sie Kontinente, Länder und Städte, um Empfehlungen und beliebte Aktivitäten zu finden.</p>
 
         <ul>
-            <li><a href="Europa.html">Europa - Entdecken Sie die besten Restaurants und Aktivitäten</a></li>
-            <li><a href="Asien.html">Asien - Tauchen Sie ein in die Kultur und Küche Asiens</a></li>
-            <li><a href="Nordamerika.html">Nordamerika - Erkunden Sie die Städte und Nationalparks</a></li>
-            <li><a href="Suedamerika.html">Südamerika - Entdecken Sie die farbenfrohen Kulturen</a></li>
-            <li><a href="Australien.html">Australien - Erleben Sie das Outback und die Strände</a></li>
-            <li><a href="Afrika.html">Afrika - Entdecken Sie die faszinierenden Landschaften und Tiere</a></li>
+            <li><a href="Europa.html">Europa</a></li>
+            <li><a href="Asien.html">Asien</a></li>
+            <li><a href="Nordamerika.html">Nordamerika</a></li>
+            <li><a href="Suedamerika.html">Südamerika</a></li>
+            <li><a href="Australien.html">Australien</a></li>
+            <li><a href="Afrika.html">Afrika</a></li>
         </ul>
     </div>
 
