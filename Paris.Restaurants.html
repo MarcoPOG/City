@@ -84,6 +84,27 @@
             }
         }
 
+        function addRow() {
+            const password = document.getElementById("passwordInput").value;
+            if (password === "3008") {
+                const name = document.getElementById("nameInput").value;
+                const category = document.getElementById("categoryInput").value;
+                const googleMaps = document.getElementById("googleMapsInput").value;
+                if (name && category && googleMaps) {
+                    const table = document.getElementById("restaurantTable").getElementsByTagName('tbody')[0];
+                    const newRow = table.insertRow();
+                    newRow.innerHTML = `<td>${name}</td><td>${category}</td><td><a href="${googleMaps}">Google Maps</a></td><td>N/A</td><td>N/A</td><td>N/A</td>`;
+                    document.getElementById("nameInput").value = "";
+                    document.getElementById("categoryInput").value = "";
+                    document.getElementById("googleMapsInput").value = "";
+                } else {
+                    alert("Bitte fülle alle Pflichtfelder aus.");
+                }
+            } else {
+                alert("Falsches Passwort.");
+            }
+        }
+
         window.onload = populateFilters;
     </script>
 </head>
@@ -141,5 +162,16 @@
             </tr>
         </tbody>
     </table>
+
+    <h2>Neues Restaurant hinzufügen</h2>
+    <label for="nameInput">Name:</label>
+    <input type="text" id="nameInput" required>
+    <label for="categoryInput">Kategorie:</label>
+    <input type="text" id="categoryInput" required>
+    <label for="googleMapsInput">Google Maps URL:</label>
+    <input type="text" id="googleMapsInput" required>
+    <label for="passwordInput">Passwort:</label>
+    <input type="password" id="passwordInput" required>
+    <button onclick="addRow()">Hinzufügen</button>
 </body>
 </html>
