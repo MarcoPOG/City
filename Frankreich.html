@@ -11,44 +11,39 @@
             background-color: #eef1f5;
         }
         h1 {
-            background-color: #0056b3;
-            color: white;
+            color: #0056b3;
             text-align: center;
             padding: 40px 20px;
             margin: 0;
-            font-size: 32px;
         }
         p {
             font-size: 18px;
             color: #333;
             text-align: center;
-            padding: 20px;
-            margin: 0;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+            padding: 0 20px;
         }
         ul {
             list-style-type: none;
             padding: 0;
-            margin: 20px auto;
-            max-width: 600px;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
-            padding: 20px;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
         }
         li {
-            margin-bottom: 10px;
+            margin: 10px;
         }
         a {
             text-decoration: none;
-            color: #007bff;
-            padding: 10px;
-            display: block; /* macht den ganzen Bereich klickbar */
-            transition: background-color 0.3s, color 0.3s;
+            color: white;
+            background-color: #007bff;
+            padding: 12px 24px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: background-color 0.3s, box-shadow 0.3s;
         }
         a:hover {
             background-color: #0056b3;
-            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
             text-decoration: none;
         }
     </style>
@@ -59,8 +54,8 @@
     <p>Wähle eine Stadt aus:</p>
 
     <ul>
-        <li><a href="Paris.html">Paris - Entdecke Restaurants und Aktivitäten in Paris.</a></li>
-        <li><a href="Nizza.html">Nizza - Entdecke die Riviera von ihrer besten Seite.</a></li>
+        <li><a href="Paris.html">Paris</a></li>
+        <li><a href="Nizza.html">Nizza</a></li>
     </ul>
 </body>
 </html>
