@@ -18,7 +18,6 @@
         }
     </style>
     <script>
-        // Diese Funktion wandelt numerische Bewertungen in Kategorien um
         function getRatingCategory(rating) {
             if (rating >= 4.5) {
                 return "Highlight";
@@ -39,7 +38,6 @@
             const uniqueCategories = new Set();
             const uniqueRatings = new Set();
 
-            // Sammele einzigartige Kategorien und Bewertungsstufen
             for (let i = 1; i < table.rows.length; i++) {
                 const category = table.rows[i].cells[1].innerText;
                 const rating = table.rows[i].cells[4].innerText;
@@ -48,14 +46,12 @@
                 uniqueRatings.add(rating);
             }
 
-            // Erstelle Dropdown-Optionen für Kategorie
             uniqueCategories.forEach(category => {
                 const option = document.createElement("option");
                 option.text = category;
                 categoryFilter.add(option);
             });
 
-            // Erstelle Dropdown-Optionen für Bewertung
             uniqueRatings.forEach(rating => {
                 const option = document.createElement("option");
                 option.text = rating;
@@ -67,32 +63,44 @@
             const table = document.getElementById("restaurantTable");
             const selectedCategory = document.getElementById("categoryFilter").value;
             const selectedRating = document.getElementById("ratingFilter").value;
+            const searchText = document.getElementById("searchInput").value.toLowerCase();
 
             for (let i = 1; i < table.rows.length; i++) {
-                const category = table.rows[i].cells[1].innerText;
-                const rating = table.rows[i].cells[4].innerText;
+                const cells = table.rows[i].cells;
+                let textMatch = false;
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j].innerText.toLowerCase().includes(searchText)) {
+                        textMatch = true;
+                        break;
+                    }
+                }
 
+                const category = cells[1].innerText;
+                const rating = cells[4].innerText;
                 const categoryMatch = (selectedCategory === "Alle" || category === selectedCategory);
                 const ratingMatch = (selectedRating === "Alle" || rating === selectedRating);
 
-                table.rows[i].style.display = (categoryMatch && ratingMatch) ? "" : "none";
+                table.rows[i].style.display = (categoryMatch && ratingMatch && textMatch) ? "" : "none";
             }
         }
 
-        window.onload = populateFilters; // Befülle Filter bei Seitenaufruf
+        window.onload = populateFilters;
     </script>
 </head>
 <body>
     <h1>Paris Restaurants</h1>
 
+    <label for="searchInput">Suche:</label>
+    <input type="text" id="searchInput" oninput="filterTable()">
+
     <label for="categoryFilter">Filter nach Kategorie:</label>
     <select id="categoryFilter" onchange="filterTable()">
-        <option>Alle</option> <!-- Option zum Zurücksetzen des Filters -->
+        <option>Alle</option>
     </select>
 
     <label for="ratingFilter">Filter nach Bewertung:</label>
     <select id="ratingFilter" onchange="filterTable()">
-        <option>Alle</option> <!-- Option zum Zurücksetzen des Filters -->
+        <option>Alle</option>
     </select>
 
     <table id="restaurantTable">
@@ -134,4 +142,3 @@
         </tbody>
     </table>
 </body>
-</html>
