@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Paris Aktivitäten</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+    </style>
+    <script>
+        function getRatingCategory(rating) {
+            if (rating >= 4.5) {
+                return "Highlight";
+            } else if (rating >= 4.0) {
+                return "sehr gut";
+            } else if (rating >= 3.0) {
+                return "gut";
+            } else {
+                return "mittel";
+            }
+        }
+
+        function populateFilters() {
+            const table = document.getElementById("activitiesTable");
+            const categoryFilter = document.getElementById("categoryFilter");
+            const ratingFilter = document.getElementById("ratingFilter");
+
+            const uniqueCategories = new Set();
+            const uniqueRatings = new Set();
+
+            for (let i = 1; i < table.rows.length; i++) {
+                const category = table.rows[i].cells[1].innerText;
+                const rating = table.rows[i].cells[4].innerText;
+
+                uniqueCategories.add(category);
+                uniqueRatings.add(rating);
+            }
+
+            uniqueCategories.forEach(category => {
+                const option = document.createElement("option");
+                option.text = category;
+                categoryFilter.add(option);
+            });
+
+            uniqueRatings.forEach(rating => {
+                const option = document.createElement("option");
+                option.text = rating;
+                ratingFilter.add(option);
+            });
+        }
+
+        function filterTable() {
+            const table = document.getElementById("activitiesTable");
+            const selectedCategory = document.getElementById("categoryFilter").value;
+            const selectedRating = document.getElementById("ratingFilter").value;
+            const searchText = document.getElementById("searchInput").value.toLowerCase();
+
+            for (let i = 1; i < table.rows.length; i++) {
+                const cells = table.rows[i].cells;
+                let textMatch = false;
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j].innerText.toLowerCase().includes(searchText)) {
+                        textMatch = true;
+                        break;
+                    }
+                }
+
+                const category = cells[1].innerText;
+                const rating = cells[4].innerText;
+                const categoryMatch = (selectedCategory === "Alle" || category === selectedCategory);
+                const ratingMatch = (selectedRating === "Alle" || rating === selectedRating);
+
+                table.rows[i].style.display = (categoryMatch && ratingMatch && textMatch) ? "" : "none";
+            }
+        }
+
+        window.onload = populateFilters;
+    </script>
+</head>
+<body>
+    <h1>Paris Aktivitäten</h1>
+
+    <label for="searchInput">Suche:</label>
+    <input type="text" id="searchInput" oninput="filterTable()">
+
+    <label for="categoryFilter">Filter nach Kategorie:</label>
+    <select id="categoryFilter" onchange="filterTable()">
+        <option>Alle</option>
+    </select>
+
+    <label for="ratingFilter">Filter nach Bewertung:</label>
+    <select id="ratingFilter" onchange="filterTable()">
+        <option>Alle</option>
+    </select>
+
+    <table id="activitiesTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Kategorie</th>
+                <th>Google Maps</th>
+                <th>Webseite</th>
+                <th>Bewertung</th>
+                <th>Kommentar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Aktivität A</td>
+                <td>Kultur</td>
+                <td><a href="https://goo.gl/maps/example1">Google Maps</a></td>
+                <td><a href="http://example.com">Webseite</a></td>
+                <td>Highlight</td>
+                <td>Faszinierende Ausstellung!</td>
+            </tr>
+            <tr>
+                <td>Aktivität B</td>
+                <td>Sport</td>
+                <td><a href="https://goo.gl/maps/example2">Google Maps</a></td>
+                <td><a href="http://example2.com">Webseite</a></td>
+                <td>sehr gut</td>
+                <td>Ausgezeichnetes Erlebnis!</td>
+            </tr>
+            <tr>
+                <td>Aktivität C</td>
+                <td>Unterhaltung</td>
+                <td><a href="https://goo.gl/maps/example3">Google Maps</a></td>
+                <td><a href="http://example3.com">Webseite</a></td>
+                <td>gut</td>
+                <td>Viel Spaß für die Familie.</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
