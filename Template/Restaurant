@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Paris Restaurants</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        td {
+            background-color: #ffffff;
+        }
+
+        th:last-child, td:last-child {
+            width: 10%; /* Verkleinert die Spalte 'Besucht vom Ersteller?' */
+        }
+
+        input[type="checkbox"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 5px;
+            border: 2px solid #007BFF;
+        }
+
+        input[type="checkbox"]:checked {
+            background: #007BFF;
+            border: 2px solid #007BFF;
+        }
+
+        input[type="checkbox"]:checked:after {
+            content: "✔";
+            color: white;
+            display: block;
+            text-align: center;
+            position: relative;
+            top: -2px;
+        }
+
+        label {
+            margin-right: 20px;
+        }
+
+        select, input[type="text"] {
+            padding: 5px;
+            margin-right: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        function getRatingCategory(rating) {
+            if (rating >= 4.5) {
+                return "Highlight";
+            } else if (rating >= 4.0) {
+                return "sehr gut";
+            } else if (rating >= 3.0) {
+                return "gut";
+            } else {
+                return "mittel";
+            }
+        }
+
+        function populateFilters() {
+            const table = document.getElementById("restaurantTable");
+            const categoryFilter = document.getElementById("categoryFilter");
+            const ratingFilter = document.getElementById("ratingFilter");
+
+            const uniqueCategories = new Set();
+            const uniqueRatings = new Set();
+
+            for (let i = 1; i < table.rows.length; i++) {
+                const category = table.rows[i].cells[1].innerText;
+                const rating = table.rows[i].cells[4].innerText;
+
+                uniqueCategories.add(category);
+                uniqueRatings.add(rating);
+            }
+
+            uniqueCategories.forEach(category => {
+                const option = document.createElement("option");
+                option.text = category;
+                categoryFilter.add(option);
+            });
+
+            uniqueRatings.forEach(rating => {
+                const option = document.createElement("option");
+                option.text = rating;
+                ratingFilter.add(option);
+            });
+        }
+
+        function filterTable() {
+            const table = document.getElementById("restaurantTable");
+            const selectedCategory = document.getElementById("categoryFilter").value;
+            const selectedRating = document.getElementById("ratingFilter").value;
+            const searchText = document.getElementById("searchInput").value.toLowerCase();
+
+            for (let i = 1; i < table.rows.length; i++) {
+                const cells = table.rows[i].cells;
+                let textMatch = false;
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j].innerText.toLowerCase().includes(searchText)) {
+                        textMatch = true;
+                        break;
+                    }
+                }
+
+                const category = cells[1].innerText;
+                const rating = cells[4].innerText;
+                const categoryMatch = (selectedCategory === "Alle" || category === selectedCategory);
+                const ratingMatch = (selectedRating === "Alle" || rating === selectedRating);
+
+                table.rows[i].style.display = (categoryMatch && ratingMatch && textMatch) ? "" : "none";
+            }
+        }
+
+        window.onload = populateFilters;
+    </script>
+</head>
+<body>
+    <h1>Paris Restaurants</h1>
+
+    <label for="searchInput">Suche:</label>
+    <input type="text" id="searchInput" oninput="filterTable()">
+
+    <label for="categoryFilter">Filter nach Kategorie:</label>
+    <select id="categoryFilter" onchange="filterTable()">
+        <option>Alle</option>
+    </select>
+
+    <label for="ratingFilter">Filter nach Bewertung:</label>
+    <select id="ratingFilter" onchange="filterTable()">
+        <option>Alle</option>
+    </select>
+
+    <table id="restaurantTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Kategorie</th>
+                <th>Google Maps</th>
+                <th>Webseite</th>
+                <th>Bewertung</th>
+                <th>Kommentar</th>
+                <th>Besucht vom Ersteller?</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Restaurant A</td>
+                <td>Französisch</td>
+                <td><a href="https://goo.gl/maps/example1">Google Maps</a></td>
+                <td><a href="http://example.com">Webseite</a></td>
+                <td>Highlight</td>
+                <td>Ausgezeichnetes Essen!</td>
+                <td><input type="checkbox" checked disabled></td>
+            </tr>
+            <tr>
+                <td>Restaurant B</td>
+                <td>Italienisch</td>
+                <td><a href="https://goo.gl/maps/example2">Google Maps</a></td>
+                <td><a href="http://example2.com">Webseite</a></td>
+                <td>sehr gut</td>
+                <td>Sehr gute Pasta.</td>
+                <td><input type="checkbox" disabled></td>
+            </tr>
+            <tr>
+                <td>Restaurant C</td>
+                <td>Französisch</td>
+                <td><a href="https://goo.gl/maps/example3">Google Maps</a></td>
+                <td><a href="http://example3.com">Webseite</a></td>
+                <td>gut</td>
+                <td>Nettes Ambiente.</td>
+                <td><input type="checkbox" disabled></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
